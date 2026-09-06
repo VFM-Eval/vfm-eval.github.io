@@ -3,58 +3,406 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Evaluating Vision Foundation Models — ECCV Tutorial</title>
-    <meta name="description" content="An ECCV tutorial on evaluating vision foundation models. Website coming soon.">
+    <title>Evaluating Visual Foundation Models — ECCV 2026 Tutorial</title>
+    <meta name="description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models: visual understanding, image and video generation, and world models for embodied intelligence.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Evaluating Visual Foundation Models — ECCV 2026 Tutorial">
+    <meta property="og:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Evaluating Visual Foundation Models — ECCV 2026 Tutorial">
+    <meta name="twitter:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models.">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232c5f8a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f4ed' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
+
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
+      :root {
+        --bg: #f7f4ed;
+        --text: #23201a;
+        --text-soft: #6f6a5e;
+        --accent: #2c5f8a;
+        --rule: #e2dcce;
       }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1b1a16;
+          --text: #eae6db;
+          --text-soft: #a29b8c;
+          --accent: #8ab4d8;
+          --rule: #33302a;
+        }
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 24px;
-        box-sizing: border-box;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        color: #1a1a1a;
-        background: #fafafa;
-        text-align: center;
+        font-size: 1.02rem;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
       }
+
       main {
-        max-width: 640px;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 4.5rem 1.5rem 5rem;
+        counter-reset: sec;
       }
-      .eyebrow {
+
+      a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: color-mix(in srgb, var(--accent) 30%, transparent);
+        text-underline-offset: 3px;
+      }
+      a:hover {
+        text-decoration-color: var(--accent);
+      }
+
+      /* ---- header ---- */
+      .kicker {
+        margin: 0 0 1.5rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
+        color: var(--accent);
+      }
+
+      h1 {
+        margin: 0 0 1.1rem;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(2rem, 6vw, 2.8rem);
+        font-weight: 500;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+      }
+
+      .meta {
+        margin: 0;
+        font-family: "Newsreader", Georgia, serif;
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--text-soft);
+      }
+      .meta span + span::before {
+        content: "·";
+        margin: 0 0.5em;
+        font-style: normal;
+      }
+
+      /* ---- sections ---- */
+      section {
+        margin-top: 3.25rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--rule);
+      }
+
+      h2 {
+        margin: 0 0 1.25rem;
         font-size: 0.8rem;
         font-weight: 600;
-        color: #6b7280;
-        margin-bottom: 1rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-soft);
       }
-      h1 {
-        font-size: 2rem;
-        line-height: 1.25;
+      h2::before {
+        counter-increment: sec;
+        content: counter(sec, decimal-leading-zero);
+        margin-right: 0.9em;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      p {
         margin: 0 0 1rem;
       }
-      .soon {
-        font-size: 1.1rem;
-        color: #374151;
-        margin: 0 0 0.5rem;
+      p:last-child {
+        margin-bottom: 0;
       }
-      .muted {
-        font-size: 0.95rem;
-        color: #6b7280;
+
+      ul {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      li::marker {
+        color: var(--accent);
+      }
+
+      .tba {
+        color: var(--text-soft);
+        font-style: italic;
+      }
+
+      /* ---- schedule ---- */
+      .schedule {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .schedule li {
+        display: grid;
+        grid-template-columns: 8.5rem 1fr;
+        gap: 1rem;
+        margin-bottom: 1.4rem;
+      }
+      .schedule li:last-child {
+        margin-bottom: 0;
+      }
+      .schedule .time {
+        color: var(--text-soft);
+        font-size: 0.9rem;
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.3rem;
+        white-space: nowrap;
+      }
+      .schedule .talk {
+        margin: 0;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 1.12rem;
+        font-weight: 500;
+        line-height: 1.45;
+      }
+      .schedule .who {
+        margin: 0.1rem 0 0;
+        color: var(--text-soft);
+        font-size: 0.92rem;
+      }
+      @media (max-width: 520px) {
+        .schedule li {
+          grid-template-columns: 1fr;
+          gap: 0.15rem;
+        }
+      }
+
+      /* ---- speakers ---- */
+      .speaker {
+        display: grid;
+        grid-template-columns: 84px 1fr;
+        gap: 1.25rem;
+        align-items: start;
+        margin-bottom: 2.25rem;
+      }
+      .speaker:last-child {
+        margin-bottom: 0;
+      }
+      .speaker img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: 50% 25%;
+        border-radius: 10px;
+        display: block;
+      }
+      .speaker h3 {
+        margin: 0 0 0.4rem;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 500;
+      }
+      .speaker .affil {
+        color: var(--text-soft);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+      .speaker .affil::before {
+        content: "·";
+        margin: 0 0.45em;
+      }
+      .speaker p {
+        margin: 0;
+        font-size: 0.97rem;
+      }
+      @media (max-width: 520px) {
+        .speaker {
+          grid-template-columns: 64px 1fr;
+          gap: 1rem;
+        }
+        .speaker p {
+          grid-column: 1 / -1;
+        }
+      }
+
+      footer {
+        margin-top: 3.25rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--rule);
+        font-size: 0.9rem;
+        color: var(--text-soft);
       }
     </style>
   </head>
   <body>
     <main>
-      <p class="eyebrow">ECCV Tutorial</p>
-      <h1>Evaluating Vision Foundation Models</h1>
-      <p class="soon"><strong>Coming soon.</strong></p>
-      <p class="muted">Tutorial details and materials will be posted here.</p>
+      <header>
+        <p class="kicker">ECCV 2026 Tutorial</p>
+        <h1>Evaluating Visual Foundation Models</h1>
+        <p class="meta">
+          <span>Malmö, Sweden</span>
+          <span>September 2026</span>
+          <span>1:00 – 5:00 PM</span>
+          <span>Quality View, Öresundssalen 1</span>
+        </p>
+      </header>
+
+      <section id="about">
+        <h2>About</h2>
+        <p>
+          The rapid advance of visual AI has produced a converging family of visual
+          foundation models (VFMs): large-scale pretrained systems that consume or generate
+          visual signals, and often interface with text and actions. This umbrella spans
+          visual understanding models such as multimodal LLMs, visual generative models
+          built on diffusion, flow-matching, or autoregressive approaches, and world models
+          that learn predictive representations of environments to support planning and
+          interaction. As these models move from research prototypes to deployed systems,
+          rigorous evaluation is no longer a secondary concern; it is the primary
+          bottleneck gating further progress.
+        </p>
+        <p>
+          Evaluation now shapes the entire development cycle. Leaderboards ground
+          comparisons in human preference, but a single scalar reveals little about
+          negation, compositionality, or physical plausibility, and in the era of RLHF
+          every weakness in a reward model becomes a target for reward hacking. This
+          half-day tutorial provides a unified treatment of evaluation across VFMs, from
+          visual understanding to generation and world models for embodied intelligence.
+        </p>
+      </section>
+
+      <section id="topics">
+        <h2>Topics</h2>
+        <ul>
+          <li>Evaluating visual understanding: capability benchmarks for perception and reasoning, plus reliability concerns like hallucination, robustness, and contamination</li>
+          <li>Evaluating image and video generation: compositional benchmarks, physical plausibility, and learned reward models</li>
+          <li>Evaluating world models: 3D consistency and whether learned models actually support downstream control</li>
+          <li>Embodied evaluation: vision-language-action systems and long-horizon tasks</li>
+          <li>Cross-cutting failure modes: judge-model circularity, reward hacking, and benchmark saturation and drift</li>
+        </ul>
+      </section>
+
+      <section id="schedule">
+        <h2>Schedule</h2>
+        <ol class="schedule">
+          <li>
+            <span class="time">1:00 – 2:00 PM</span>
+            <div>
+              <p class="talk">Evaluating Visual Understanding: From VQA to Multimodal Reasoning</p>
+              <p class="who"><a href="#ruchit-rawal">Ruchit Rawal</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="time">2:00 – 3:00 PM</span>
+            <div>
+              <p class="talk">Evaluating Image and Video Generation Models</p>
+              <p class="who"><a href="#gowthami-somepalli">Gowthami Somepalli</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="time">3:00 – 4:00 PM</span>
+            <div>
+              <p class="talk">Evaluation for World Models and 3D Consistency</p>
+              <p class="who"><a href="#ziqi-ma">Ziqi Ma</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="time">4:00 – 5:00 PM</span>
+            <div>
+              <p class="talk">Evaluating World Models for Embodied Intelligence</p>
+              <p class="who"><a href="#furong-huang">Furong Huang</a></p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="speakers">
+        <h2>Speakers</h2>
+
+        <div class="speaker" id="ruchit-rawal">
+          <img src="images/ruchit.jpg" alt="Ruchit Rawal">
+          <div>
+            <h3><a href="https://ruchitrawal.github.io/">Ruchit Rawal</a><span class="affil">University of Maryland</span></h3>
+            <p>
+              Ruchit Rawal is a PhD student in computer science at the University of
+              Maryland, advised by Tom Goldstein. His research focuses on the evaluation and
+              reliability of multimodal LLMs, including CinePile, a benchmark for long-video
+              question answering, and ARGUS, a framework for measuring hallucinations and
+              omissions in video captioning.
+            </p>
+          </div>
+        </div>
+
+        <div class="speaker" id="gowthami-somepalli">
+          <img src="images/gowthami.jpg" alt="Gowthami Somepalli">
+          <div>
+            <h3><a href="https://somepago.github.io/">Gowthami Somepalli</a><span class="affil">World Labs</span></h3>
+            <p>
+              Gowthami Somepalli is a member of technical staff at World Labs, working on
+              post-training of generative world models. She received her PhD from the
+              University of Maryland, where she studied memorization and data replication in
+              diffusion models, style similarity, and video understanding benchmarks.
+            </p>
+          </div>
+        </div>
+
+        <div class="speaker" id="ziqi-ma">
+          <img src="images/ziqi.jpg" alt="Ziqi Ma">
+          <div>
+            <h3><a href="https://ziqi-ma.github.io/">Ziqi Ma</a><span class="affil">Caltech</span></h3>
+            <p>
+              Ziqi Ma is a PhD student in computing and mathematical sciences at Caltech,
+              advised by Georgia Gkioxari and Yisong Yue, and a Kortschak Scholar, working on
+              3D computer vision to enable AI in the physical world. Recent work includes
+              SAM 3D for image-to-3D reconstruction, Find Any Part in 3D (an ICCV 2025
+              highlight) for open-world 3D part localization, and Steer3D for
+              language-steerable editing of generative 3D models, alongside research
+              experience at Meta Superintelligence Labs and Microsoft.
+            </p>
+          </div>
+        </div>
+
+        <div class="speaker" id="furong-huang">
+          <img src="images/furong.jpg" alt="Furong Huang">
+          <div>
+            <h3><a href="https://furong-huang.com/">Furong Huang</a><span class="affil">University of Maryland</span></h3>
+            <p>
+              Furong Huang is an Associate Professor of Computer Science at the University of
+              Maryland. Her research spans trustworthy AI, reinforcement learning, and embodied
+              intelligence, with recent work on visual representation learning for robotic
+              control (TACO, Premier-TACO), vision-language-action models (TraceVLA), and
+              model-based RL under world-model uncertainty (COPlanner). She is a recipient of
+              an NSF CAREER Award, a DARPA Young Faculty Award, an ONR Young Investigator
+              Award, and multiple Amazon and JP Morgan faculty research awards.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="materials">
+        <h2>Materials</h2>
+        <p class="tba">Slides and recordings will be posted after the tutorial.</p>
+      </section>
+
+      <footer>
+        <p>Questions? Reach out at <a href="mailto:rawalruchit22@gmail.com">rawalruchit22@gmail.com</a>.</p>
+      </footer>
     </main>
   </body>
 </html>
