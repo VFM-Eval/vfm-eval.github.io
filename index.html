@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Evaluating Visual Foundation Models — ECCV 2026 Tutorial</title>
-    <meta name="description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models: visual understanding, image and video generation, and world models for embodied intelligence.">
+    <title>Evaluating Visual Foundation and World Models — ECCV 2026 Tutorial</title>
+    <meta name="description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation and world models: visual understanding, image and video generation, and world models for embodied intelligence.">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Evaluating Visual Foundation Models — ECCV 2026 Tutorial">
-    <meta property="og:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models.">
+    <meta property="og:title" content="Evaluating Visual Foundation and World Models — ECCV 2026 Tutorial">
+    <meta property="og:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation and world models.">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Evaluating Visual Foundation Models — ECCV 2026 Tutorial">
-    <meta name="twitter:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation models.">
+    <meta name="twitter:title" content="Evaluating Visual Foundation and World Models — ECCV 2026 Tutorial">
+    <meta name="twitter:description" content="A half-day tutorial at ECCV 2026 on evaluating visual foundation and world models.">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232c5f8a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f4ed' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
@@ -81,12 +81,20 @@
       }
 
       h1 {
-        margin: 0 0 1.1rem;
+        margin: 0 0 0.6rem;
         font-family: "Newsreader", Georgia, serif;
         font-size: clamp(2rem, 6vw, 2.8rem);
         font-weight: 500;
         line-height: 1.12;
         letter-spacing: -0.01em;
+      }
+
+      .subtitle {
+        margin: 0 0 1.1rem;
+        font-family: "Newsreader", Georgia, serif;
+        font-style: italic;
+        font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+        line-height: 1.4;
       }
 
       .meta {
@@ -255,10 +263,11 @@
     <main>
       <header>
         <p class="kicker">ECCV 2026 Tutorial</p>
-        <h1>Evaluating Visual Foundation Models</h1>
+        <h1>Evaluating Visual Foundation and World&nbsp;Models</h1>
+        <p class="subtitle">From Visual Understanding to World Modeling</p>
         <p class="meta">
           <span>Malmö, Sweden</span>
-          <span>September 2026</span>
+          <span>September 9, 2026</span>
           <span>1:00 – 5:00 PM</span>
           <span>Quality View, Öresundssalen 1</span>
         </p>
@@ -271,19 +280,23 @@
           foundation models (VFMs): large-scale pretrained systems that consume or generate
           visual signals, and often interface with text and actions. This umbrella spans
           visual understanding models such as multimodal LLMs, visual generative models
-          built on diffusion, flow-matching, or autoregressive approaches, and world models
-          that learn predictive representations of environments to support planning and
-          interaction. As these models move from research prototypes to deployed systems,
-          rigorous evaluation is no longer a secondary concern; it is the primary
-          bottleneck gating further progress.
+          built on diffusion, flow-matching, or autoregressive approaches, and, increasingly,
+          world models that simulate environments to support planning and interaction. As
+          generation matures into interactive, 3D-consistent, action-conditioned simulation,
+          it is not enough to ask whether an output looks right; we also have to ask whether
+          the world a model imagines stays coherent over time, obeys physics, and can
+          sustain an agent acting within it. As these models move from research prototypes to
+          deployed systems, rigorous evaluation is no longer a secondary concern; it is the
+          primary bottleneck gating further progress.
         </p>
         <p>
           Evaluation now shapes the entire development cycle. Leaderboards ground
           comparisons in human preference, but a single scalar reveals little about
           negation, compositionality, or physical plausibility, and in the era of RLHF
           every weakness in a reward model becomes a target for reward hacking. This
-          half-day tutorial provides a unified treatment of evaluation across VFMs, from
-          visual understanding to generation and world models for embodied intelligence.
+          half-day tutorial traces the full arc of VFM evaluation, from visual
+          understanding through image and video generation to world models for embodied
+          intelligence.
         </p>
       </section>
 
@@ -292,8 +305,8 @@
         <ul>
           <li>Evaluating visual understanding: capability benchmarks for perception and reasoning, plus reliability concerns like hallucination, robustness, and contamination</li>
           <li>Evaluating image and video generation: compositional benchmarks, physical plausibility, and learned reward models</li>
-          <li>Evaluating world models: 3D consistency and whether learned models actually support downstream control</li>
-          <li>Embodied evaluation: vision-language-action systems and long-horizon tasks</li>
+          <li>Evaluating world models: 3D consistency, geometric stability, and long-horizon coherence of generated worlds</li>
+          <li>World models for embodied intelligence: whether learned worlds support planning, control, and vision-language-action systems</li>
           <li>Cross-cutting failure modes: judge-model circularity, reward hacking, and benchmark saturation and drift</li>
         </ul>
       </section>
@@ -355,9 +368,11 @@
             <h3><a href="https://somepago.github.io/">Gowthami Somepalli</a><span class="affil">World Labs</span></h3>
             <p>
               Gowthami Somepalli is a member of technical staff at World Labs, working on
-              post-training of generative world models. She received her PhD from the
-              University of Maryland, where she studied memorization and data replication in
-              diffusion models, style similarity, and video understanding benchmarks.
+              post-training of generative world models, and a core contributor to Atlas,
+              World Labs' newly released multimodal world model for spatial intelligence.
+              She received her PhD from the University of Maryland, where she studied
+              memorization and data replication in diffusion models, style similarity, and
+              video understanding benchmarks.
             </p>
           </div>
         </div>
