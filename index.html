@@ -194,6 +194,12 @@
         color: var(--text-soft);
         font-size: 0.92rem;
       }
+      .schedule .break {
+        margin: 0;
+        color: var(--text-soft);
+        font-style: italic;
+        padding-top: 0.15rem;
+      }
       @media (max-width: 520px) {
         .schedule li {
           grid-template-columns: 1fr;
@@ -315,28 +321,41 @@
         <h2>Schedule</h2>
         <ol class="schedule">
           <li>
-            <span class="time">1:00 – 2:00 PM</span>
+            <span class="time">1:00 – 1:40 PM</span>
             <div>
               <p class="talk">Evaluating Visual Understanding: From VQA to Multimodal Reasoning</p>
               <p class="who"><a href="#ruchit-rawal">Ruchit Rawal</a></p>
             </div>
           </li>
           <li>
-            <span class="time">2:00 – 3:00 PM</span>
+            <span class="time">1:40 – 2:20 PM</span>
             <div>
               <p class="talk">Evaluating Image and Video Generation Models</p>
               <p class="who"><a href="#gowthami-somepalli">Gowthami Somepalli</a></p>
             </div>
           </li>
           <li>
-            <span class="time">3:00 – 4:00 PM</span>
+            <span class="time">2:20 – 3:00 PM</span>
+            <div>
+              <p class="talk tba">TBA</p>
+              <p class="who"><a href="#kamal-gupta">Kamal Gupta</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="time">3:00 – 3:20 PM</span>
+            <div>
+              <p class="break">Break</p>
+            </div>
+          </li>
+          <li>
+            <span class="time">3:20 – 4:00 PM</span>
             <div>
               <p class="talk">Evaluation for World Models and 3D Consistency</p>
               <p class="who"><a href="#ziqi-ma">Ziqi Ma</a></p>
             </div>
           </li>
           <li>
-            <span class="time">4:00 – 5:00 PM</span>
+            <span class="time">4:00 – 4:40 PM</span>
             <div>
               <p class="talk">Evaluating World Models for Embodied Intelligence</p>
               <p class="who"><a href="#furong-huang">Furong Huang</a></p>
@@ -373,6 +392,21 @@
               She received her PhD from the University of Maryland, where she studied
               memorization and data replication in diffusion models, style similarity, and
               video understanding benchmarks.
+            </p>
+          </div>
+        </div>
+
+        <div class="speaker" id="kamal-gupta">
+          <img src="images/kamal.jpg" alt="Kamal Gupta">
+          <div>
+            <h3><a href="https://kampta.github.io/">Kamal Gupta</a><span class="affil">Tesla AI</span></h3>
+            <p>
+              Kamal Gupta is a Staff Research Scientist at Tesla AI, where he works on
+              Optimus, extending large multimodal models into the physical world. His work
+              focuses on multi-task learning and failure recovery, reliability in
+              real-world robotics, and scaling human data collection. He received a PhD in
+              computer science from the University of Maryland, with earlier research
+              stints at Google, NVIDIA, and Amazon.
             </p>
           </div>
         </div>
