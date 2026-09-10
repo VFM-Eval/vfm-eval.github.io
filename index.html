@@ -200,6 +200,23 @@
         font-style: italic;
         padding-top: 0.15rem;
       }
+      .slides-btn {
+        display: inline-block;
+        margin-left: 0.6rem;
+        padding: 0 0.6rem;
+        border: 1px solid var(--accent);
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .slides-btn:hover {
+        background: var(--accent);
+        color: var(--bg);
+        text-decoration: none;
+      }
       @media (max-width: 520px) {
         .schedule li {
           grid-template-columns: 1fr;
@@ -337,8 +354,8 @@
           <li>
             <span class="time">2:20 – 3:00 PM</span>
             <div>
-              <p class="talk tba">TBA</p>
-              <p class="who"><a href="#kamal-gupta">Kamal Gupta</a></p>
+              <p class="talk">Better Evals for Better Policy</p>
+              <p class="who"><a href="#kamal-gupta">Kamal Gupta</a><a class="slides-btn" href="slides/robotics-evals-linked.pdf">Slides</a></p>
             </div>
           </li>
           <li>
